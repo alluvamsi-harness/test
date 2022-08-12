@@ -51,7 +51,7 @@ containerDefinitions:
 placementConstraints: []
 memory: '512'
 taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
-family: sainath-fargate
+family: vamsi-fargate
 pidMode:
 requiresCompatibilities:
 - FARGATE
