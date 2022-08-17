@@ -4,8 +4,8 @@
       "image" : "<+artifact.image>",
       "links" : [ ],
       "portMappings" : [ {
-        "hostPort" : "80"
-        "containerPort" : "80",
+        "hostPort" : 80
+        "containerPort" : 80,
         "protocol" : "tcp"
       } ],
       "logConfiguration": {
@@ -46,8 +46,8 @@
                 }
       },
       "portMappings" : [ {
-        "hostPort" : "80"
-        "containerPort" : "80",
+        "hostPort" : 80
+        "containerPort" : 80,
         "protocol" : "tcp"
       } ]
     } ],
