@@ -4,7 +4,7 @@
       "image" : "<+artifact.image>",
       "links" : [ ],
       "portMappings" : [ {
-        "hostPort" : 80
+        "hostPort" : 80,
         "containerPort" : 80,
         "protocol" : "tcp"
       } ],
@@ -46,7 +46,7 @@
                 }
       },
       "portMappings" : [ {
-        "hostPort" : 80
+        "hostPort" : 80,
         "containerPort" : 80,
         "protocol" : "tcp"
       } ]
