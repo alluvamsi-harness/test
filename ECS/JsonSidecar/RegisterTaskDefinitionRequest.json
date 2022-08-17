@@ -57,6 +57,7 @@
         "FARGATE" 
     ],
     "networkMode" : "awsvpc",
+    "taskRoleArn" : "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
     "family" : "vamsi-sidecar",
     "placementConstraints" : [ ],
     "compatibilities" : [ ],
