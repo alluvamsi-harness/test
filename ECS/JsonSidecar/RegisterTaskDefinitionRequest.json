@@ -4,9 +4,19 @@
       "image" : "<+artifact.image>",
       "links" : [ ],
       "portMappings" : [ {
+        "hostPort" : 80
         "containerPort" : 80,
         "protocol" : "tcp"
       } ],
+      "logConfiguration": {
+                "logDriver": "awslogs",
+                "secretOptions": null,
+                "options": {
+                    "awslogs-group": "/ecs/sainath-fargate",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+      },
       "memory" : "512",
       "entryPoint" : [ ],
       "command" : [ ],
@@ -26,15 +36,28 @@
       "name" : "image_sidecar",
       "image" : "<+artifacts.sidecars.sidecar.imagePath>",
       "memory" : "512",
+      "logConfiguration": {
+                "logDriver": "awslogs",
+                "secretOptions": null,
+                "options": {
+                    "awslogs-group": "/ecs/sainath-fargate",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+      },
       "portMappings" : [ {
-        "containerPort" : 85,
+        "hostPort" : 80
+        "containerPort" : 80,
         "protocol" : "tcp"
       } ]
     } ],
     "executionRoleArn" : "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
     "volumes" : [ ],
-    "requiresAttributes" : [ ],
-    "family" : "vamsi-sidecar
+    "requiresAttributes" : [ 
+        "FARGATE" 
+    ],
+    "networkMode" : "awsvpc",
+    "family" : "vamsi-sidecar",
     "placementConstraints" : [ ],
     "compatibilities" : [ ],
     "requiresCompatibilities" : [ ],
