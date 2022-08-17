@@ -34,6 +34,7 @@
     "executionRoleArn" : "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
     "volumes" : [ ],
     "requiresAttributes" : [ ],
+    "family" : "vamsi-sidecar
     "placementConstraints" : [ ],
     "compatibilities" : [ ],
     "requiresCompatibilities" : [ ],
