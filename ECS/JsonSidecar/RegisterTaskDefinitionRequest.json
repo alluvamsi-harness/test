@@ -1,0 +1,43 @@
+{
+    "containerDefinitions" : [ {
+      "name" : "image_main",
+      "image" : "<+artifact.image>",
+      "links" : [ ],
+      "portMappings" : [ {
+        "containerPort" : 80,
+        "protocol" : "tcp"
+      } ],
+      "memory" : "512",
+      "entryPoint" : [ ],
+      "command" : [ ],
+      "environment" : [ ],
+      "mountPoints" : [ ],
+      "volumesFrom" : [ ],
+      "dependsOn" : [ ],
+      "dnsServers" : [ ],
+      "dnsSearchDomains" : [ ],
+      "extraHosts" : [ ],
+      "dockerSecurityOptions" : [ ],
+      "ulimits" : [ ],
+      "systemControls" : [ ],
+      "resourceRequirements" : [ ]
+    },
+  {
+      "name" : "image_sidecar",
+      "image" : "<+artifacts.sidecars.sidecar.imagePath>",
+      "memory" : "512",
+      "portMappings" : [ {
+        "containerPort" : 85,
+        "protocol" : "tcp"
+      } ]
+    } ],
+    "executionRoleArn" : "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
+    "volumes" : [ ],
+    "requiresAttributes" : [ ],
+    "placementConstraints" : [ ],
+    "compatibilities" : [ ],
+    "requiresCompatibilities" : [ ],
+    "cpu" : "512",
+    "memory" : "1024",
+    "inferenceAccelerators" : [ ]
+  }
