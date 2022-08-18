@@ -55,7 +55,7 @@ family: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variable
 pidMode:
 requiresCompatibilities:
 - FARGATE
-networkMode: awsvpc
+networkMode: <+secrets.getValue("awsvpc")>
 runtimePlatform:
 cpu: '256'
 inferenceAccelerators:
