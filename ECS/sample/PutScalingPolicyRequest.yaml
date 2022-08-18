@@ -1,6 +1,6 @@
 scalableDimension: ecs:service:DesiredCount
 serviceNamespace: ecs
-policyName: P1
+policyName: <+secrets.getValue("policyName")>
 policyType: TargetTrackingScaling
 targetTrackingScalingPolicyConfiguration:
   targetValue: 60
