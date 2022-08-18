@@ -1,0 +1,71 @@
+containerDefinitions:
+- name: image_main
+  image: "<+artifact.image>"
+  links: []
+  portMappings:
+  - hostPort: 80
+    containerPort: 80
+    protocol: tcp
+  logConfiguration:
+    logDriver: awslogs
+    secretOptions:
+    options:
+      awslogs-group: "/ecs/sainath-fargate"
+      awslogs-region: us-east-1
+      awslogs-stream-prefix: ecs
+  memory: '512'
+  entryPoint: []
+  command: []
+  environment: []
+  mountPoints: []
+  volumesFrom: []
+  dependsOn: []
+  dnsServers: []
+  dnsSearchDomains: []
+  extraHosts: []
+  dockerSecurityOptions: []
+  ulimits: []
+  systemControls: []
+  resourceRequirements: []
+- name: image_sidecar
+  image: "<+artifacts.sidecars.sidecar.imagePath>"
+  links: []
+  portMappings:
+  - hostPort: 8080
+    containerPort: 8080
+    protocol: tcp
+  logConfiguration:
+    logDriver: awslogs
+    secretOptions:
+    options:
+      awslogs-group: "/ecs/sainath-fargate"
+      awslogs-region: us-east-1
+      awslogs-stream-prefix: ecs
+  memory: '512'
+  entryPoint: []
+  command: []
+  environment:
+  - NGINX_PORT: 8080
+  mountPoints: []
+  volumesFrom: []
+  dependsOn: []
+  dnsServers: []
+  dnsSearchDomains: []
+  extraHosts: []
+  dockerSecurityOptions: []
+  ulimits: []
+  systemControls: []
+  resourceRequirements: []
+executionRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
+volumes: []
+requiresAttributes:
+- FARGATE
+networkMode: awsvpc
+taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
+family: vamsi-sidecar
+placementConstraints: []
+compatibilities: []
+requiresCompatibilities: []
+cpu: '512'
+memory: '1024'
+inferenceAccelerators: []
