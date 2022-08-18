@@ -1,4 +1,4 @@
-serviceNamespace: ecs
+serviceNamespace: <+secrets.getValue("ecs")>
 scalableDimension: ecs:service:DesiredCount
-minCapacity: <+secrets.getValue("minCapacity")>
+minCapacity: 1
 maxCapacity: 3
