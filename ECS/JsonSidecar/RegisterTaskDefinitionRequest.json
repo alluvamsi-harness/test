@@ -4,7 +4,7 @@
       "image" : "<+artifact.image>",
       "links" : [ ],
       "portMappings" : [ {
-        "hostPort" : 8080,
+        "hostPort" : 80,
         "containerPort" : 80,
         "protocol" : "tcp"
       } ],
@@ -35,7 +35,12 @@
   {
       "name" : "image_sidecar",
       "image" : "<+artifacts.sidecars.sidecar.imagePath>",
-      "memory" : "512",
+      "links" : [ ],
+      "portMappings" : [ {
+        "hostPort" : 80,
+        "containerPort" : 80,
+        "protocol" : "tcp"
+      } ],
       "logConfiguration": {
                 "logDriver": "awslogs",
                 "secretOptions": null,
@@ -45,11 +50,20 @@
                     "awslogs-stream-prefix": "ecs"
                 }
       },
-      "portMappings" : [ {
-        "hostPort" : 8080,
-        "containerPort" : 80,
-        "protocol" : "tcp"
-      } ]
+      "memory" : "512",
+      "entryPoint" : [ ],
+      "command" : [ ],
+      "environment" : [ {"NGINX_PORT" : 8080} ],
+      "mountPoints" : [ ],
+      "volumesFrom" : [ ],
+      "dependsOn" : [ ],
+      "dnsServers" : [ ],
+      "dnsSearchDomains" : [ ],
+      "extraHosts" : [ ],
+      "dockerSecurityOptions" : [ ],
+      "ulimits" : [ ],
+      "systemControls" : [ ],
+      "resourceRequirements" : [ ]
     } ],
     "executionRoleArn" : "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
     "volumes" : [ ],
