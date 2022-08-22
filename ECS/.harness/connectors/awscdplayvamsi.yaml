@@ -1,0 +1,14 @@
+connector:
+  name: aws-cd-play-vamsi
+  identifier: awscdplayvamsi
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIA3XTXJV7YESH7D54I
+        accessKeyRef: null
+        secretKeyRef: alluawscdplay
