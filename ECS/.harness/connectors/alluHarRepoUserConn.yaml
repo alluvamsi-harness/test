@@ -1,0 +1,23 @@
+connector:
+  name: alluHarRepoUserConn
+  identifier: alluHarRepoUserConn
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Github
+  spec:
+    url: https://github.com/alluvamsi-harness
+    validationRepo: gitSync
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: githubpat
+    apiAccess:
+      type: Token
+      spec:
+        tokenRef: githubpat
+    executeOnDelegate: true
+    type: Account
