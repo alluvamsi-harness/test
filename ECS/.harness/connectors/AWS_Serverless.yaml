@@ -1,0 +1,14 @@
+connector:
+  name: cdPlayAlluAWS
+  identifier: AWS_Serverless
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIA3XTXJV7YESH7D54I
+        accessKeyRef: null
+        secretKeyRef: cdPlayAlluAWSKey
