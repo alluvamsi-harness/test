@@ -77,9 +77,9 @@ pipeline:
                       connectorRef: sainath_nexus_v3
                       artifactPath: nginx
                       tag: latest
-                      repository: cdp-qa-automation-1
+                      repository: todolist
                       repositoryFormat: docker
-                      repositoryPort: "8081"
+                      repositoryUrl: https://nexus3.dev.harness.io/repository/todolist/
                     type: Nexus3Registry
               type: ECS
           infrastructure:
