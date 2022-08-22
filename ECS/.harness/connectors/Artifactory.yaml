@@ -1,0 +1,15 @@
+connector:
+  name: Artifactory
+  identifier: Artifactory
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Artifactory
+  spec:
+    artifactoryServerUrl: https://harness.jfrog.io/harness
+    auth:
+      type: UsernamePassword
+      spec:
+        username: automationuser
+        usernameRef: null
+        passwordRef: artifactory_pass
