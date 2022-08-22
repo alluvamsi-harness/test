@@ -23,12 +23,6 @@ pipeline:
                   - name: taskName
                     type: String
                     value: <+input>
-                  - name: ecs
-                    type: String
-                    value: <+input>
-                  - name: policyName
-                    type: String
-                    value: <+input>
                 manifests:
                   - manifest:
                       identifier: taskDef
