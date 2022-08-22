@@ -1,0 +1,18 @@
+connector:
+  name: repo-PipelineAutomation
+  identifier: repoPipelineAutomation
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Github
+  spec:
+    url: https://github.com/wings-software/PipelinesNgAutomation
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: githubpat
+    executeOnDelegate: true
+    type: Repo
