@@ -1,0 +1,19 @@
+connector:
+  name: GitHubAccHttpConnectorForAutomationTest
+  identifier: GitHubAccHttpConnectorForAutomationTest
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Github
+  spec:
+    url: https://github.com/wings-software
+    validationRepo: PipelinesNgAutomation
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: allugithub
+    executeOnDelegate: true
+    type: Account
