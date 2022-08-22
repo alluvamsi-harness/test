@@ -1,0 +1,19 @@
+connector:
+  name: acc-wings-software
+  identifier: accwingssoftware
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Github
+  spec:
+    url: https://github.com/wings-software/
+    validationRepo: PipelinesNgAutomation
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: githubpat
+    executeOnDelegate: true
+    type: Account
