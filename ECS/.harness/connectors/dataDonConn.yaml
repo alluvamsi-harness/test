@@ -1,0 +1,11 @@
+connector:
+  name: dataDonConn
+  identifier: dataDonConn
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Datadog
+  spec:
+    url: https://app.datadoghq.com/api/
+    applicationKeyRef: dataDogAppKey
+    apiKeyRef: dataDogApiKey
