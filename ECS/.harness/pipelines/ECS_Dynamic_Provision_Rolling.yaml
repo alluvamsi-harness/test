@@ -1,0 +1,182 @@
+pipeline:
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ecs
+        identifier: ecs
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: vamsi_ecs
+            serviceDefinition:
+              spec:
+                variables:
+                  - name: serviceName
+                    type: String
+                    value: <+input>
+                  - name: desiredCount
+                    type: Number
+                    value: <+input>
+                  - name: taskName
+                    type: String
+                    value: <+input>
+                manifests:
+                  - manifest:
+                      identifier: taskDef
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: serviceDef
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/CreateServiceRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: Scaling
+                      type: EcsScalingPolicyDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/PutScalingPolicyRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: Scalable
+                      type: EcsScalableTargetDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterScalableTargetRequest.yaml
+                            branch: main
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: harnessdocker
+                      imagePath: harness/todolist-sample
+                      tag: "3"
+                    type: DockerRegistry
+              type: ECS
+          infrastructure:
+            environmentRef: ecs_env_vamsi
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: awscdplayvamsi
+                region: us-east-1
+                cluster: ecs-tutorial
+              provisioner:
+                steps:
+                  - step:
+                      type: CreateStack
+                      name: Create EC2 Instance
+                      identifier: Create_EC2_Instance
+                      timeout: 10m
+                      spec:
+                        provisionerIdentifier: idd
+                        configuration:
+                          connectorRef: awscdplayvamsi
+                          region: us-east-1
+                          stackName: pr-ecs-dynamic
+                          templateFile:
+                            type: Remote
+                            spec:
+                              store:
+                                type: Github
+                                spec:
+                                  paths:
+                                    - CF_template.yaml
+                                  connectorRef: allugitHub
+                                  repoName: test
+                                  gitFetchType: Branch
+                                  branch: main
+                  - step:
+                      type: JiraApproval
+                      name: App
+                      identifier: App
+                      spec:
+                        connectorRef: Jira_Conn
+                        projectKey: CDS
+                        issueType: Story
+                        issueKey: CDS-41037
+                        approvalCriteria:
+                          type: KeyValues
+                          spec:
+                            matchAnyCondition: true
+                            conditions:
+                              - key: FF Added
+                                operator: equals
+                                value: "Yes"
+                        rejectionCriteria:
+                          type: KeyValues
+                          spec:
+                            matchAnyCondition: true
+                            conditions: []
+                      timeout: 1d
+                  - step:
+                      type: DeleteStack
+                      name: Delete Stack
+                      identifier: Delete_Stack
+                      timeout: 10m
+                      spec:
+                        configuration:
+                          type: Inherited
+                          spec:
+                            provisionerIdentifier: idd
+                rollbackSteps:
+                  - step:
+                      type: RollbackStack
+                      name: Rollback Stack
+                      identifier: Rollback_Stack
+                      spec:
+                        configuration:
+                          provisionerIdentifier: idd
+                      timeout: 10m
+            allowSimultaneousDeployments: true
+          execution:
+            steps:
+              - step:
+                  name: Rolling Deployment
+                  identifier: rollingDeployment
+                  type: EcsRollingDeploy
+                  timeout: 10m
+                  spec: {}
+            rollbackSteps:
+              - step:
+                  name: Rollback Rolling Deployment
+                  identifier: rollbackRollingDeployment
+                  type: EcsRollingRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+  identifier: ECS_Dynamic_Provision_Rolling
+  name: ECS_Dynamic_Provision_Rolling
