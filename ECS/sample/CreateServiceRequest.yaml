@@ -1,5 +1,5 @@
 launchType: FARGATE
-serviceName: <+secrets.getValue("serviceName")>
+serviceName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>
 desiredCount: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>
 networkConfiguration:
   awsvpcConfiguration:
