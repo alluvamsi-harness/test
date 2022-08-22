@@ -1,0 +1,85 @@
+pipeline:
+  name: ECS_Rolling_EC2
+  identifier: ECS_Rolling_EC2
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: stage1
+        identifier: stage1
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: vamsi_ecs
+            serviceDefinition:
+              spec:
+                variables: []
+                manifests:
+                  - manifest:
+                      identifier: ecs
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allugitHub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                            repoName: test
+                            branch: main
+                  - manifest:
+                      identifier: ecs-service
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allugitHub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/CreateServiceRequest.yaml
+                            repoName: test
+                            branch: main
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: awscdplayvamsi
+                      imagePath: ecs_test-vamsi
+                      tag: latest
+                      region: us-east-1
+                    type: Ecr
+              type: ECS
+          infrastructure:
+            environmentRef: ecs_env_vamsi
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: awscdplayvamsi
+                region: us-east-1
+                cluster: ecs-tutorial
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  name: Rolling Deployment
+                  identifier: rollingDeployment
+                  type: EcsRollingDeploy
+                  timeout: 10m
+                  spec: {}
+                  failureStrategies: []
+            rollbackSteps:
+              - step:
+                  type: EcsRollingRollback
+                  name: Ecs Rollback
+                  identifier: ECSRollback
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
