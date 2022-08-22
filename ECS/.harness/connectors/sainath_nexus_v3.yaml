@@ -1,0 +1,15 @@
+connector:
+  name: sainath nexus v3
+  identifier: sainath_nexus_v3
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Nexus
+  spec:
+    nexusServerUrl: https://nexus3.dev.harness.io
+    version: 3.x
+    auth:
+      type: UsernamePassword
+      spec:
+        username: harnessadmin
+        usernameRef: null
+        passwordRef: sainath_nexus_v3_pwd
