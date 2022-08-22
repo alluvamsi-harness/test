@@ -1,0 +1,103 @@
+pipeline:
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ecs
+        identifier: ecs
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: vamsi_ecs
+            serviceDefinition:
+              spec:
+                variables:
+                  - name: serviceName
+                    type: String
+                    value: <+input>
+                  - name: desiredCount
+                    type: Number
+                    value: 1
+                  - name: taskName
+                    type: String
+                    value: <+input>
+                manifests:
+                  - manifest:
+                      identifier: taskDef
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Harness
+                          spec:
+                            files:
+                              - /ECS/sample/RegisterTaskDefinitionRequest.yaml
+                  - manifest:
+                      identifier: serviceDef
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Harness
+                          spec:
+                            files:
+                              - /ECS/sample/CreateServiceRequest.yaml
+                  - manifest:
+                      identifier: Scaling
+                      type: EcsScalingPolicyDefinition
+                      spec:
+                        store:
+                          type: Harness
+                          spec:
+                            files:
+                              - /ECS/sample/PutScalingPolicyRequest.yaml
+                  - manifest:
+                      identifier: Scalable
+                      type: EcsScalableTargetDefinition
+                      spec:
+                        store:
+                          type: Harness
+                          spec:
+                            files:
+                              - /ECS/sample/RegisterScalableTargetRequest.yaml
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: harnessdocker
+                      imagePath: harness/todolist-sample
+                      tag: "3"
+                    type: DockerRegistry
+              type: ECS
+          infrastructure:
+            environmentRef: ecs_env_vamsi
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: awscdplayvamsi
+                region: us-east-1
+                cluster: ecs-tutorial
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  name: Rolling Deployment
+                  identifier: rollingDeployment
+                  type: EcsRollingDeploy
+                  timeout: 10m
+                  spec: {}
+            rollbackSteps:
+              - step:
+                  name: Rollback Rolling Deployment
+                  identifier: rollbackRollingDeployment
+                  type: EcsRollingRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+  identifier: ECS_Harness_Fargate_Rolling
+  name: ECS_Harness_Fargate_Rolling
