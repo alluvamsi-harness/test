@@ -1,0 +1,16 @@
+connector:
+  name: hjjnacd
+  identifier: hjjnacd
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Git
+  spec:
+    url: https://github.com/alluvamsi-harness
+    validationRepo: gitSync
+    executeOnDelegate: true
+    type: Http
+    connectionType: Account
+    spec:
+      username: alluvamsi-harness
+      usernameRef: null
+      passwordRef: githubpat
