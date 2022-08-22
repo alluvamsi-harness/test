@@ -1,0 +1,20 @@
+inputSet:
+  identifier: "serviceNameecsvamsi"
+  pipeline:
+    identifier: "Test_Fargate_Rolling"
+    stages:
+    - stage:
+        identifier: "ecs"
+        type: "Deployment"
+        spec:
+          serviceConfig:
+            serviceDefinition:
+              type: "ECS"
+              spec:
+                variables:
+                - name: "serviceName"
+                  type: "String"
+                  value: "ecs-vamsi"
+  name: "serviceName-ecs-vamsi"
+  orgIdentifier: "default"
+  projectIdentifier: "defaultproject"
