@@ -1,0 +1,18 @@
+connector:
+  name: allu-gitLab
+  identifier: allugitLab
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Gitlab
+  spec:
+    url: https://gitlab.com/harness2/
+    validationRepo: test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: gitLab
+    type: Account
