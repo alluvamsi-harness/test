@@ -1,0 +1,75 @@
+pipeline:
+    name: pipeline
+    identifier: pipeline
+    projectIdentifier: CD_Docs1
+    orgIdentifier: default
+    storeType: ""
+    remoteType: create
+    tags: {}
+    stages:
+        - stage:
+              name: Deploy Service
+              identifier: Deploy_Service
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: severless
+                      serviceDefinition:
+                          spec:
+                              variables: []
+                              manifests:
+                                  - manifest:
+                                        identifier: serverless
+                                        type: ServerlessAwsLambda
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: serverless
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - serverless/artifacts
+                                                    branch: main
+                              artifacts:
+                                  primary:
+                                      spec:
+                                          connectorRef: JFrog_Serverless2
+                                          artifactDirectory: serverless
+                                          artifactPath: handler.zip
+                                          repository: lambda
+                                          repositoryFormat: generic
+                                      type: ArtifactoryRegistry
+                          type: ServerlessAwsLambda
+                  execution:
+                      steps:
+                          - step:
+                                name: Serverless Aws Lambda Deploy
+                                identifier: ServerlessAwsLambdaDeploy
+                                type: ServerlessAwsLambdaDeploy
+                                timeout: 10m
+                                spec:
+                                    commandOptions: ""
+                      rollbackSteps:
+                          - step:
+                                name: Serverless Aws Lambda Rollback
+                                identifier: ServerlessAwsLambdaRollback
+                                type: ServerlessAwsLambdaRollback
+                                timeout: 10m
+                                spec: {}
+                  infrastructure:
+                      environmentRef: ServerlessEnv
+                      infrastructureDefinition:
+                          type: ServerlessAwsLambda
+                          spec:
+                              connectorRef: AWS_Serverless
+                              stage: vamsi-dev1
+                              region: us-east-1
+                      allowSimultaneousDeployments: false
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
