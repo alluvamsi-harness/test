@@ -1,0 +1,18 @@
+connector:
+  name: bitBucket-harness
+  identifier: bitBucket
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Bitbucket
+  spec:
+    url: https://bitbucket.dev.harness.io/
+    validationRepo: harness
+    authentication:
+      type: Http
+      spec:
+        type: UsernamePassword
+        spec:
+          username: harnessadmin
+          passwordRef: bitBucket
+    type: Account
