@@ -1,5 +1,5 @@
 scalableDimension: ecs:service:DesiredCount
-serviceNamespace: ecs
+serviceNamespace: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.ecs>
 policyName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.policyName>
 policyType: TargetTrackingScaling
 targetTrackingScalingPolicyConfiguration:
