@@ -1,0 +1,14 @@
+connector:
+  name: qa-setup
+  identifier: qasetup
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIAW7HFSAHL4EWQYANB
+        accessKeyRef: null
+        secretKeyRef: qasetupaws
