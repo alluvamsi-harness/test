@@ -1,0 +1,17 @@
+connector:
+  name: allu
+  identifier: allu
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: K8sCluster
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        masterUrl: https://34.69.2.190
+        auth:
+          type: ServiceAccount
+          spec:
+            serviceAccountTokenRef: k8CDNGautomationTocken
+            caCertRef: null
