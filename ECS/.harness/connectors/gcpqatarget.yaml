@@ -1,0 +1,12 @@
+connector:
+  name: gcp-qa-target
+  identifier: gcpqatarget
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Gcp
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        secretKeyRef: gcpqatarget
