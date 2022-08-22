@@ -1,0 +1,12 @@
+connector:
+  name: Jira Conn
+  identifier: Jira_Conn
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Jira
+  spec:
+    jiraUrl: https://harness.atlassian.net
+    username: allu.vamsi@harness.io
+    usernameRef: null
+    passwordRef: Harness_Jira_API_Key
