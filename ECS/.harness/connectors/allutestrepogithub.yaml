@@ -1,0 +1,18 @@
+connector:
+  name: allu-test-repo-github
+  identifier: allutestrepogithub
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Github
+  spec:
+    url: https://github.com/alluvamsi-harness/test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: allu.vamsi@harness.io
+          tokenRef: allugithub
+    executeOnDelegate: true
+    type: Repo
