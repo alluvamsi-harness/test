@@ -1,6 +1,6 @@
 pipeline:
-  name: ECS_test
-  identifier: ECS_test
+  name: ECS_test1
+  identifier: ECS_test1
   projectIdentifier: CD_Docs1
   orgIdentifier: default
   tags: {}
