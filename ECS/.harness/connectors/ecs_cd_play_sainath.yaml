@@ -1,0 +1,14 @@
+connector:
+  name: ecs cd play sainath
+  identifier: ecs_cd_play_sainath
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIA3XTXJV7YEKGI5UGP
+        accessKeyRef: null
+        secretKeyRef: aws_cd_play_sainath
