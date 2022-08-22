@@ -1,0 +1,10 @@
+connector:
+  name: JFrog Serverless2
+  identifier: JFrog_Serverless2
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Artifactory
+  spec:
+    artifactoryServerUrl: https://harness.jfrog.io/artifactory/
+    auth:
+      type: Anonymous
