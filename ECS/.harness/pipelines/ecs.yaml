@@ -1,0 +1,127 @@
+pipeline:
+  name: ecs
+  identifier: ecs
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ecs
+        identifier: ecs
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: sainath_ecs
+            serviceDefinition:
+              spec:
+                variables:
+                  - name: serviceName
+                    type: String
+                    value: <+input>
+                  - name: desiredCount
+                    type: Number
+                    value: <+input>
+                manifests:
+                  - manifest:
+                      identifier: taskDef
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: Sainath_Github
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: serviceDef
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: Sainath_Github
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/CreateServiceRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: scalingPolicy
+                      type: EcsScalingPolicyDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: Sainath_Github
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/PutScalingPolicyRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: scalableTarget
+                      type: EcsScalableTargetDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: Sainath_Github
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterScalableTargetRequest.yaml
+                            branch: main
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: Artifactory
+                      artifactPath: nginx
+                      tag: latest
+                      repository: docker-local
+                      repositoryFormat: docker
+                    type: ArtifactoryRegistry
+              type: ECS
+          infrastructure:
+            environmentRef: ecs_env
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: ecs_cd_play_sainath
+                region: us-east-1
+                cluster: iam-serverless-test
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  type: EcsRollingDeploy
+                  name: ECS Rolling Deploy
+                  identifier: abcd
+                  spec: {}
+                  timeout: 5m
+              - step:
+                  type: HarnessApproval
+                  name: approve
+                  identifier: approve
+                  spec:
+                    approvalMessage: Please review the following information and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      userGroups:
+                        - account.admin
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                    approverInputs: []
+                  timeout: 1d
+            rollbackSteps:
+              - step:
+                  type: EcsRollingRollback
+                  name: Ecs Rolling Rollback Step 1
+                  identifier: ecsRoll
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
