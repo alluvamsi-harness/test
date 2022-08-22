@@ -1,0 +1,17 @@
+connector:
+  name: serverless
+  identifier: serverless
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Github
+  spec:
+    url: https://github.com/wings-software/harness-docs
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: githubpat
+    executeOnDelegate: true
+    type: Repo
