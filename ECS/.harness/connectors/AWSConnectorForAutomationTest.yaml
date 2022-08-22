@@ -1,0 +1,14 @@
+connector:
+  name: AWSConnectorForAutomationTest
+  identifier: AWSConnectorForAutomationTest
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Aws
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        accessKey: AKIAW7HFSAHL4EWQYANB
+        accessKeyRef: null
+        secretKeyRef: awsqasetup
