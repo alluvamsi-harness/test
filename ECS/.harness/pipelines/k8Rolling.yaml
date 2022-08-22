@@ -1,0 +1,66 @@
+pipeline:
+    name: k8Rolling
+    identifier: k8Rolling
+    projectIdentifier: CD_Docs1
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: stage1
+              identifier: stage1
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: K8_service
+                      serviceDefinition:
+                          spec:
+                              variables: []
+                              manifests:
+                                  - manifest:
+                                        identifier: k8ngnix
+                                        type: K8sManifest
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: k8GithubWebsite
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - content/en/examples/application/nginx-app.yaml
+                                                    branch: main
+                                            skipResourceVersioning: false
+                          type: Kubernetes
+                  infrastructure:
+                      environmentRef: K8Env
+                      infrastructureDefinition:
+                          type: KubernetesGcp
+                          spec:
+                              connectorRef: GCPK8
+                              cluster: us-central1-c/qa-target-latest
+                              namespace: default
+                              releaseName: release-<+INFRA_KEY>
+                      allowSimultaneousDeployments: false
+                  execution:
+                      steps:
+                          - step:
+                                name: Rollout Deployment
+                                identifier: rolloutDeployment
+                                type: K8sRollingDeploy
+                                timeout: 10m
+                                spec:
+                                    skipDryRun: false
+                      rollbackSteps:
+                          - step:
+                                name: Rollback Rollout Deployment
+                                identifier: rollbackRolloutDeployment
+                                type: K8sRollingRollback
+                                timeout: 10m
+                                spec: {}
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
