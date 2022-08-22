@@ -1,0 +1,12 @@
+connector:
+  name: gcp-harness
+  identifier: gcpharness
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Gcp
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        secretKeyRef: gcpharnessplaygroundservice
