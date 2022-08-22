@@ -1,0 +1,19 @@
+connector:
+  name: allu-gitHub-acc
+  identifier: allugitHub
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Github
+  spec:
+    url: https://github.com/alluvamsi-harness
+    validationRepo: test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: allugithub
+    executeOnDelegate: true
+    type: Account
