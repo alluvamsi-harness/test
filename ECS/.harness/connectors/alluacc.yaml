@@ -1,0 +1,19 @@
+connector:
+  name: allu-acc
+  identifier: alluacc
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CD_Docs1
+  type: Github
+  spec:
+    url: https://github.com/alluvamsi-harness
+    validationRepo: test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: alluvamsi-harness
+          tokenRef: githuballu
+    executeOnDelegate: true
+    type: Account
