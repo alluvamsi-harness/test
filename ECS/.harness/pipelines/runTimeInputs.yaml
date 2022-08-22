@@ -1,0 +1,118 @@
+pipeline:
+    name: runTimeInputs
+    identifier: runTimeInputs
+    projectIdentifier: CD_Docs1
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: Jira Approval
+              identifier: Jira_Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: Approval
+                                type: JiraApproval
+                                timeout: 1d
+                                spec:
+                                    approvalCriteria:
+                                        type: KeyValues
+                                        spec:
+                                            matchAnyCondition: true
+                                            conditions:
+                                                - key: FF Added
+                                                  operator: equals
+                                                  value: "No"
+                                    rejectionCriteria:
+                                        type: KeyValues
+                                        spec:
+                                            matchAnyCondition: true
+                                            conditions: []
+                                    connectorRef: Jira_Conn
+                                    projectKey: CDS
+                                    issueType: Story
+                                    issueKey: CDS-39807
+                                failureStrategies: []
+                          - step:
+                                name: Jira Update
+                                identifier: Jira_Update
+                                type: JiraUpdate
+                                timeout: 5m
+                                spec:
+                                    connectorRef: Jira_Conn
+                                    issueKey: <+pipeline.stages.Jira_Approval.spec.execution.steps.Approval.spec.issueKey>
+                                    fields: []
+              tags: {}
+        - stage:
+              name: stage1
+              identifier: stage1
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: severless
+                      serviceDefinition:
+                          spec:
+                              variables: []
+                              manifests:
+                                  - manifest:
+                                        identifier: serverless
+                                        type: ServerlessAwsLambda
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: serverless
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - serverless/artifacts
+                                                    branch: main
+                              artifacts:
+                                  primary:
+                                      spec:
+                                          connectorRef: JFrog_Serverless2
+                                          artifactDirectory: serverless
+                                          artifactPath: handler.zip
+                                          repository: lambda
+                                          repositoryFormat: generic
+                                      type: ArtifactoryRegistry
+                          type: ServerlessAwsLambda
+                  execution:
+                      steps:
+                          - step:
+                                name: Serverless Lambda Deploy
+                                identifier: ServerlessLambdaDeploy
+                                type: ServerlessAwsLambdaDeploy
+                                timeout: 10m
+                                spec:
+                                    commandOptions: ""
+                                    delegateSelectors:
+                                        - acctgroup
+                                failureStrategies: []
+                      rollbackSteps:
+                          - step:
+                                name: Serverless Lambda Rollback
+                                identifier: ServerlessLambdaRollback
+                                type: ServerlessAwsLambdaRollback
+                                timeout: 10m
+                                spec: {}
+                  infrastructure:
+                      environmentRef: ServerlessEnv
+                      infrastructureDefinition:
+                          type: ServerlessAwsLambda
+                          spec:
+                              connectorRef: AWS_Serverless
+                              stage: vamsi-dev
+                              region: us-east-1
+                      allowSimultaneousDeployments: false
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
