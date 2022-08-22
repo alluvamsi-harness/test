@@ -1,0 +1,76 @@
+pipeline:
+    name: gitSyncPipe
+    identifier: gitSyncPipe
+    projectIdentifier: CD_Docs1
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: stage2
+              identifier: stage2
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: severless
+                      serviceDefinition:
+                          spec:
+                              variables: []
+                              manifests:
+                                  - manifest:
+                                        identifier: serverless
+                                        type: ServerlessAwsLambda
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: serverless
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - serverless/artifacts
+                                                    branch: main
+                              artifacts:
+                                  primary:
+                                      spec:
+                                          connectorRef: JFrog_Serverless2
+                                          artifactDirectory: serverless
+                                          artifactPath: handler.zip
+                                          repository: lambda
+                                          repositoryFormat: generic
+                                      type: ArtifactoryRegistry
+                          type: ServerlessAwsLambda
+                  execution:
+                      steps:
+                          - step:
+                                name: Serverless Lambda Deploy
+                                identifier: ServerlessLambdaDeploy
+                                type: ServerlessAwsLambdaDeploy
+                                timeout: 10m
+                                spec:
+                                    commandOptions: ""
+                                    delegateSelectors:
+                                        - acctgroup
+                                failureStrategies: []
+                      rollbackSteps:
+                          - step:
+                                name: Serverless Lambda Rollback
+                                identifier: ServerlessLambdaRollback
+                                type: ServerlessAwsLambdaRollback
+                                timeout: 10m
+                                spec: {}
+                  infrastructure:
+                      environmentRef: ServerlessEnv
+                      infrastructureDefinition:
+                          type: ServerlessAwsLambda
+                          spec:
+                              connectorRef: AWS_Serverless
+                              stage: dev
+                              region: us-east-1
+                      allowSimultaneousDeployments: false
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: StageRollback
