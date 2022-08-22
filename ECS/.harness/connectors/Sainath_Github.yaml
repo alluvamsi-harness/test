@@ -1,0 +1,17 @@
+connector:
+  name: Sainath Github
+  identifier: Sainath_Github
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Github
+  spec:
+    url: https://github.com/sainath-b/Sainath-Test
+    authentication:
+      type: Http
+      spec:
+        type: UsernameToken
+        spec:
+          username: sainath.batthala@harness.io
+          tokenRef: Sainath_Github_PAT
+    executeOnDelegate: true
+    type: Repo
