@@ -1,0 +1,102 @@
+pipeline:
+  name: ECS_test
+  identifier: ECS_test
+  projectIdentifier: CD_Docs1
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: stage1
+        identifier: stage1
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: ecs
+            serviceDefinition:
+              spec:
+                variables: []
+                manifests:
+                  - manifest:
+                      identifier: ecs task def
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: accwingssoftware
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                            repoName: PipelinesNgAutomation
+                            branch: master
+                  - manifest:
+                      identifier: ecs service
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: accwingssoftware
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/CreateServiceRequest.yaml
+                            repoName: PipelinesNgAutomation
+                            branch: master
+                  - manifest:
+                      identifier: ecs sacling policy
+                      type: EcsScalingPolicyDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: accwingssoftware
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/PutScalingPolicyRequest.yaml
+                            repoName: PipelinesNgAutomation
+                            branch: master
+                  - manifest:
+                      identifier: "ecs "
+                      type: EcsScalableTargetDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: accwingssoftware
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterScalableTargetRequest.yaml
+                            repoName: PipelinesNgAutomation
+                            branch: master
+              type: ECS
+          infrastructure:
+            environmentRef: ecsenv
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: AWS_Serverless
+                region: us-east-1
+                cluster: ecs-tutorial
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  type: EcsRollingDeploy
+                  name: Rolling
+                  identifier: Rolling
+                  spec: {}
+                  timeout: 10m
+              - step:
+                  type: EcsRollingDeploy
+                  name: Ecs Rolling2
+                  identifier: Ecs_Rolling2
+                  spec: {}
+                  timeout: 10m
+            rollbackSteps:
+              - step:
+                  type: EcsRollingRollback
+                  name: Ecs Rolling Rollback
+                  identifier: EcsRollback
+                  spec: {}
+        tags: {}
