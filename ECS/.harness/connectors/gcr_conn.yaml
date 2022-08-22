@@ -1,0 +1,11 @@
+connector:
+  name: gcr conn
+  identifier: gcr_conn
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Gcp
+  spec:
+    credential:
+      type: ManualConfig
+      spec:
+        secretKeyRef: gcr_cd_play_sainath
