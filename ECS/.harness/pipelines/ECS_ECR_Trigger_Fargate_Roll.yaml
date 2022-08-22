@@ -1,0 +1,113 @@
+pipeline:
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ecs
+        identifier: ecs
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: vamsi_ecs
+            serviceDefinition:
+              spec:
+                variables:
+                  - name: serviceName
+                    type: String
+                    value: ecs-vamsi
+                  - name: desiredCount
+                    type: Number
+                    value: 1
+                manifests:
+                  - manifest:
+                      identifier: taskDef
+                      type: EcsTaskDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: serviceDef
+                      type: EcsServiceDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/CreateServiceRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: Scaling
+                      type: EcsScalingPolicyDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/PutScalingPolicyRequest.yaml
+                            branch: main
+                  - manifest:
+                      identifier: Scalable
+                      type: EcsScalableTargetDefinition
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: allutestrepogithub
+                            gitFetchType: Branch
+                            paths:
+                              - ECS/sample/RegisterScalableTargetRequest.yaml
+                            branch: main
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: <+input>
+                      imagePath: <+input>
+                      tag: <+input>
+                      region: <+input>
+                    type: Ecr
+              type: ECS
+          infrastructure:
+            environmentRef: ecs_env_vamsi
+            infrastructureDefinition:
+              type: ECS
+              spec:
+                connectorRef: awscdplayvamsi
+                region: us-east-1
+                cluster: ecs-tutorial
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  name: Rolling Deployment
+                  identifier: rollingDeployment
+                  type: EcsRollingDeploy
+                  timeout: 10m
+                  spec: {}
+            rollbackSteps:
+              - step:
+                  name: Rollback Rolling Deployment
+                  identifier: rollbackRollingDeployment
+                  type: EcsRollingRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+  identifier: ECS_ECR_Trigger_Fargate_Roll
+  name: ECS_ECR_Trigger_Fargate_Roll
