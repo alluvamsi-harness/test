@@ -60,7 +60,7 @@
     "placementConstraints": [],
     "memory": "512",
     "taskRoleArn": "arn:aws:iam::806630305776:role/ecsTaskExecutionRole",
-    "family": "<+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.taskName>",
+    "family": <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.taskName>,
     "pidMode": null,
     "requiresCompatibilities": [
         "FARGATE"
