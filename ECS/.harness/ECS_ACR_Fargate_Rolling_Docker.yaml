@@ -76,10 +76,10 @@ pipeline:
                   primary:
                     spec:
                       connectorRef: ACRconn
-                      tag: 1.15.5-alpine
+                      tag: v1.0
                       subscriptionId: 12d2db62-5aa9-471d-84bb-faa489b3e319
-                      registry: blablablabla
-                      repository: nginx
+                      registry: puthraya
+                      repository: hello-187
                     type: Acr
               type: ECS
           infrastructure:
