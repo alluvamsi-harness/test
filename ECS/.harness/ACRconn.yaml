@@ -9,7 +9,7 @@ connector:
     credential:
       type: ManualConfig
       spec:
-        applicationId: baca1841-c593-407b-8793-98d3781f4fbf
+        applicationId: 0a4391e2-4cf3-4724-81c9-375b7c2e8cee
         tenantId: b229b2bb-5f33-4d22-bce0-730f6474e906
         auth:
           type: Secret
