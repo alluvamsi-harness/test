@@ -1,7 +1,7 @@
 {
     "launchType": "FARGATE",
-    "serviceName": "ecs-sidecar",
-    "desiredCount": 1,
+    "serviceName": <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>,
+    "desiredCount": <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>,
     "networkConfiguration": {
         "awsvpcConfiguration": {
             "securityGroups": [
