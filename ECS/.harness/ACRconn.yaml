@@ -9,8 +9,8 @@ connector:
     credential:
       type: ManualConfig
       spec:
-        applicationId: 3a0d5a3b-3f52-47a0-be10-8cdf69266bab
-        tenantId: a37cf8b7-9130-4f0e-bc19-c447331adace
+        applicationId: 38fca8d7-4dda-41d5-b106-e5d8712b733a
+        tenantId: b229b2bb-5f33-4d22-bce0-730f6474e906
         auth:
           type: Secret
           spec:
