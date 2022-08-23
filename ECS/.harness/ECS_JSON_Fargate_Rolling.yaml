@@ -34,7 +34,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                              - ECS/JsonSidecar/RegisterTaskDefinitionRequest.yaml
                             branch: main
                   - manifest:
                       identifier: serviceDef
