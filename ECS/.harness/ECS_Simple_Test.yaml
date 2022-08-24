@@ -100,19 +100,7 @@ pipeline:
                   type: EcsRollingDeploy
                   timeout: 10m
                   spec: {}
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Retry
-                          spec:
-                            retryCount: 1
-                            retryIntervals:
-                              - 1m
-                            onRetryFailure:
-                              action:
-                                type: Ignore
+                  failureStrategies: []
             rollbackSteps:
               - step:
                   name: Rollback Rolling Deployment
