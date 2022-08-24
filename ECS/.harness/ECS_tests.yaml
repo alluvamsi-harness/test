@@ -125,11 +125,10 @@ pipeline:
                 sidecars: []
                 primary:
                   spec:
-                    connectorRef: awscdplayvamsi
-                    imagePath: test-docker
-                    tag: foo
-                    region: us-east-1
-                  type: Ecr
+                    connectorRef: harnessdocker
+                    imagePath: harness/todolist-sample
+                    tag: "131"
+                  type: DockerRegistry
               manifests:
                 - manifest:
                     identifier: task2
