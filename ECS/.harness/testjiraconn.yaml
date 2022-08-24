@@ -1,0 +1,11 @@
+connector:
+  name: test-jira-conn
+  identifier: testjiraconn
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Jira
+  spec:
+    jiraUrl: https://harness.atlassian.net
+    username: allu.vamsi@harness.io
+    passwordRef: Jira_Api_Key
