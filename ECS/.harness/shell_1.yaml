@@ -1,0 +1,35 @@
+template:
+  name: shell
+  identifier: shell
+  type: Stage
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  spec:
+    type: Custom
+    spec:
+      execution:
+        steps:
+          - stepGroup:
+              name: group
+              identifier: group
+              steps:
+                - step:
+                    type: ShellScript
+                    name: shell
+                    identifier: shell
+                    spec:
+                      shell: Bash
+                      onDelegate: true
+                      source:
+                        type: Inline
+                        spec:
+                          script: echo "hello"
+                      environmentVariables: []
+                      outputVariables: []
+                      executionTarget: {}
+                    timeout: 10m
+        rollbackSteps: []
+      serviceDependencies: []
+    when:
+      pipelineStatus: Success
+  versionLabel: "1"
