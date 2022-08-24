@@ -13,16 +13,7 @@ pipeline:
             serviceRef: vamsi_ecs
             serviceDefinition:
               spec:
-                variables:
-                  - name: serviceName
-                    type: String
-                    value: <+input>
-                  - name: desiredCount
-                    type: Number
-                    value: <+input>
-                  - name: taskName
-                    type: String
-                    value: <+input>
+                variables: []
                 manifests:
                   - manifest:
                       identifier: taskDef
