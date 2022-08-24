@@ -16,13 +16,13 @@ pipeline:
                 variables:
                   - name: serviceName
                     type: String
-                    value: ecs-vamsi
+                    value: ecs-canary
                   - name: desiredCount
                     type: Number
                     value: 1
                   - name: taskName
                     type: String
-                    value: task-vamsi
+                    value: task-canary
                 manifests:
                   - manifest:
                       identifier: taskDef
