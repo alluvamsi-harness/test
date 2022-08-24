@@ -1,0 +1,43 @@
+pipeline:
+  name: ECS_Template_Tests
+  identifier: ECS_Template_Tests
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: shell
+        identifier: shell
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - stepGroup:
+                  name: group
+                  identifier: group
+                  steps:
+                    - step:
+                        type: ShellScript
+                        name: shell
+                        identifier: shell
+                        spec:
+                          shell: Bash
+                          onDelegate: true
+                          source:
+                            type: Inline
+                            spec:
+                              script: exit 1
+                          environmentVariables: []
+                          outputVariables: []
+                          executionTarget: {}
+                        timeout: 10m
+            rollbackSteps: []
+          serviceDependencies: []
+        tags: {}
+    - stage:
+        name: stage1
+        identifier: stage1
+        template:
+          templateRef: ecsdockertempstage
+          versionLabel: "1"
