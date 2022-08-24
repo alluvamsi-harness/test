@@ -132,11 +132,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  name: Rolling Deployment
-                  identifier: rollingDeployment
                   type: EcsRollingDeploy
-                  timeout: 10m
+                  name: Rolling2
+                  identifier: Rolling2
                   spec: {}
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rolling Deployment
