@@ -137,6 +137,6 @@ pipeline:
         tags: {}
         when:
           pipelineStatus: Success
-          condition: <+steps.Rolling Deployment.output.status> == “success”
+          condition: <+steps.rollingDeployment.output.status> == “success”
   identifier: ECS_Simple_Test
   name: ECS_Simple_Test
