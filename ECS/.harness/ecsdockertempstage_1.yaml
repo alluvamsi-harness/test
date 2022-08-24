@@ -1,0 +1,111 @@
+template:
+  name: ecs-docker-temp-stage
+  identifier: ecsdockertempstage
+  type: Stage
+  projectIdentifier: defaultproject
+  orgIdentifier: default
+  spec:
+    type: Deployment
+    spec:
+      serviceConfig:
+        serviceRef: vamsi_ecs
+        serviceDefinition:
+          spec:
+            variables:
+              - name: serviceName
+                type: String
+                value: ecs-vamsi
+              - name: desiredCount
+                type: Number
+                value: 1
+              - name: taskName
+                type: String
+                value: task-vamsi
+            manifests:
+              - manifest:
+                  identifier: taskDef
+                  type: EcsTaskDefinition
+                  spec:
+                    store:
+                      type: Github
+                      spec:
+                        connectorRef: allutestrepogithub
+                        gitFetchType: Branch
+                        paths:
+                          - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                        branch: main
+              - manifest:
+                  identifier: serviceDef
+                  type: EcsServiceDefinition
+                  spec:
+                    store:
+                      type: Github
+                      spec:
+                        connectorRef: allutestrepogithub
+                        gitFetchType: Branch
+                        paths:
+                          - ECS/sample/CreateServiceRequest.yaml
+                        branch: main
+              - manifest:
+                  identifier: Scaling
+                  type: EcsScalingPolicyDefinition
+                  spec:
+                    store:
+                      type: Github
+                      spec:
+                        connectorRef: allutestrepogithub
+                        gitFetchType: Branch
+                        paths:
+                          - ECS/sample/PutScalingPolicyRequest.yaml
+                        branch: main
+              - manifest:
+                  identifier: Scalable
+                  type: EcsScalableTargetDefinition
+                  spec:
+                    store:
+                      type: Github
+                      spec:
+                        connectorRef: allutestrepogithub
+                        gitFetchType: Branch
+                        paths:
+                          - ECS/sample/RegisterScalableTargetRequest.yaml
+                        branch: main
+            artifacts:
+              primary:
+                spec:
+                  connectorRef: harnessdocker
+                  imagePath: harness/todolist-sample
+                  tag: "3"
+                type: DockerRegistry
+          type: ECS
+      infrastructure:
+        environmentRef: ecs_env_vamsi
+        infrastructureDefinition:
+          type: ECS
+          spec:
+            connectorRef: awscdplayvamsi
+            region: us-east-1
+            cluster: ecs-tutorial
+        allowSimultaneousDeployments: false
+      execution:
+        steps:
+          - step:
+              name: Rolling Deployment
+              identifier: rollingDeployment
+              type: EcsRollingDeploy
+              timeout: 10m
+              spec: {}
+        rollbackSteps:
+          - step:
+              name: Rollback Rolling Deployment
+              identifier: rollbackRollingDeployment
+              type: EcsRollingRollback
+              timeout: 10m
+              spec: {}
+    failureStrategies:
+      - onFailure:
+          errors:
+            - AllErrors
+          action:
+            type: StageRollback
+  versionLabel: "1"
