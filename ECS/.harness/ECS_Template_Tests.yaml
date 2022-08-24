@@ -35,6 +35,9 @@ pipeline:
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
+        when:
+          pipelineStatus: Success
+          condition: <+steps.mystep.output.shell> == “success”
     - stage:
         name: stage1
         identifier: stage1
