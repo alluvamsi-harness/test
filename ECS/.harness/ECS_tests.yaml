@@ -152,4 +152,4 @@ pipeline:
               action:
                 type: StageRollback
   identifier: ECS_tests
-  name: ECS_tests
+  name: ECS_Stage_Override
