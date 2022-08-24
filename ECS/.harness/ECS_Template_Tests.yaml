@@ -6,8 +6,8 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: stage1
-        identifier: stage1
+        name: temp
+        identifier: temp
         template:
           templateRef: ecsdockertempstage
           versionLabel: "1"
