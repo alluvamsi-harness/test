@@ -27,7 +27,7 @@ pipeline:
                           source:
                             type: Inline
                             spec:
-                              script: exit 1
+                              script: echo "hello"
                           environmentVariables: []
                           outputVariables: []
                           executionTarget: {}
