@@ -112,7 +112,8 @@ pipeline:
         failureStrategies:
           - onFailure:
               errors:
-                - AllErrors
+                - Unknown
+                - DelegateProvisioning
               action:
                 type: StageRollback
     - stage:
