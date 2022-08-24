@@ -53,6 +53,9 @@ memory: '512'
 taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
 family: task-ec2
 pidMode:
+compatibilities:
+- EXTERNAL
+- EC2
 requiresCompatibilities:
 - EC2
 networkMode: awsvpc
