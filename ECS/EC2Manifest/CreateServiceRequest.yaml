@@ -1,4 +1,4 @@
-launchType: FARGATE
+launchType: EC2
 serviceName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>
 desiredCount: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>
 networkConfiguration:
