@@ -111,5 +111,11 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+    - stage:
+        name: shell
+        identifier: shell
+        template:
+          templateRef: shell
+          versionLabel: "1"
   identifier: ECS_Simple_Test
   name: ECS_Simple_Test
