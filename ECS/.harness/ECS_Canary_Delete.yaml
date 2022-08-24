@@ -97,6 +97,12 @@ pipeline:
                   identifier: Deploy
                   spec: {}
                   timeout: 10m
+              - step:
+                  type: EcsCanaryDelete
+                  name: Delete
+                  identifier: Delete
+                  spec: {}
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rolling Deployment
