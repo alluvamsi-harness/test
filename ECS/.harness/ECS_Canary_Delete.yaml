@@ -92,9 +92,9 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: EcsCanaryDeploy
-                  name: canary deploy
-                  identifier: canary_deploy
+                  type: EcsCanaryDelete
+                  name: Delete
+                  identifier: Delete
                   spec: {}
                   timeout: 10m
             rollbackSteps:
