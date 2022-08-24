@@ -144,11 +144,6 @@ pipeline:
                   type: EcsRollingRollback
                   timeout: 10m
                   spec: {}
-              - step:
-                  type: EcsRollingRollback
-                  name: Ecs Rolling Rollback
-                  identifier: rolling2
-                  spec: {}
         tags: {}
         failureStrategies:
           - onFailure:
