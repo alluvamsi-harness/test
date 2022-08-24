@@ -112,4 +112,4 @@ pipeline:
               action:
                 type: StageRollback
   identifier: ECS_Canary_Fargate
-  name: ECS_Docker_Fargate_Rolling
+  name: ECS_Canary_Fargate
