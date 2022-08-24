@@ -34,7 +34,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/JsonSidecar/RegisterTaskDefinitionRequest.yaml
+                              - ECS/JsonSidecar/RegisterTaskDefinitionRequest.json
                             branch: main
                   - manifest:
                       identifier: serviceDef
@@ -46,7 +46,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/JsonSidecar/CreateServiceRequest.yaml
+                              - ECS/JsonSidecar/CreateServiceRequest.json
                             branch: main
                   - manifest:
                       identifier: Scaling
@@ -58,7 +58,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/JsonSidecar/PutScalingPolicyRequest.yaml
+                              - ECS/JsonSidecar/PutScalingPolicyRequest.json
                             branch: main
                   - manifest:
                       identifier: Scalable
@@ -70,7 +70,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/JsonSidecar/RegisterScalableTargetRequest.yaml
+                              - ECS/JsonSidecar/RegisterScalableTargetRequest.json
                             branch: main
                 artifacts:
                   primary:
