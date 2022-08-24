@@ -120,6 +120,70 @@ pipeline:
           serviceConfig:
             useFromStage:
               stage: ecs
+            stageOverrides:
+              artifacts:
+                sidecars: []
+                primary:
+                  spec:
+                    connectorRef: awscdplayvamsi
+                    imagePath: test-docker
+                    tag: foo
+                    region: us-east-1
+                  type: Ecr
+              manifests:
+                - manifest:
+                    identifier: task2
+                    type: EcsTaskDefinition
+                    spec:
+                      store:
+                        type: Github
+                        spec:
+                          connectorRef: allugitHub
+                          gitFetchType: Branch
+                          paths:
+                            - ECS/sample/RegisterTaskDefinitionRequest.yaml
+                          repoName: test
+                          branch: main
+                - manifest:
+                    identifier: service2
+                    type: EcsServiceDefinition
+                    spec:
+                      store:
+                        type: Github
+                        spec:
+                          connectorRef: allugitHub
+                          gitFetchType: Branch
+                          paths:
+                            - ECS/sample/CreateServiceRequest.yaml
+                          repoName: test
+                          branch: main
+                - manifest:
+                    identifier: scaling2
+                    type: EcsScalingPolicyDefinition
+                    spec:
+                      store:
+                        type: Github
+                        spec:
+                          connectorRef: allugitHub
+                          gitFetchType: Branch
+                          paths:
+                            - ECS/JsonSidecar/PutScalingPolicyRequest.json
+                          repoName: test
+                          branch: main
+                - manifest:
+                    identifier: scalable
+                    type: EcsScalableTargetDefinition
+                    spec:
+                      store:
+                        type: Github
+                        spec:
+                          connectorRef: allugitHub
+                          gitFetchType: Branch
+                          paths:
+                            - ECS/JsonSidecar/RegisterScalableTargetRequest.json
+                          repoName: test
+                          branch: main
+              variables: []
           infrastructure:
             environmentRef: ecs_env_vamsi
             infrastructureDefinition:
