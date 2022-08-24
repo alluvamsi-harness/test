@@ -16,13 +16,13 @@ pipeline:
                 variables:
                   - name: serviceName
                     type: String
-                    value: <+input>
+                    value: ecs-json
                   - name: desiredCount
                     type: Number
-                    value: <+input>
+                    value: 1
                   - name: taskName
                     type: String
-                    value: <+input>
+                    value: task-json
                 manifests:
                   - manifest:
                       identifier: taskDef
