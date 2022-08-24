@@ -114,8 +114,29 @@ pipeline:
     - stage:
         name: shell
         identifier: shell
-        template:
-          templateRef: shell
-          versionLabel: "1"
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: shell-step
+                  identifier: shellstep
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "hello-vamsi"
+                    environmentVariables: []
+                    outputVariables: []
+                    executionTarget: {}
+                  timeout: 10m
+        tags: {}
+        when:
+          pipelineStatus: Success
+          condition: <+steps.Rolling Deployment.output.status> == “success”
   identifier: ECS_Simple_Test
   name: ECS_Simple_Test
