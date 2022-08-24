@@ -91,18 +91,45 @@ pipeline:
             allowSimultaneousDeployments: false
           execution:
             steps:
-              - step:
-                  type: EcsCanaryDeploy
-                  name: Deploy
-                  identifier: Deploy
-                  spec: {}
-                  timeout: 10m
-              - step:
-                  type: EcsCanaryDelete
-                  name: Delete
-                  identifier: Delete
-                  spec: {}
-                  timeout: 10m
+              - stepGroup:
+                  name: canary
+                  identifier: canary
+                  steps:
+                    - step:
+                        type: EcsCanaryDeploy
+                        name: deploy
+                        identifier: deploy
+                        spec: {}
+                        timeout: 10m
+                    - step:
+                        type: JiraApproval
+                        name: Jira App
+                        identifier: Jira_App
+                        spec:
+                          connectorRef: testjiraconn
+                          projectKey: CDS
+                          issueType: Story
+                          issueKey: CDS-41037
+                          approvalCriteria:
+                            type: KeyValues
+                            spec:
+                              matchAnyCondition: true
+                              conditions:
+                                - key: FF Added
+                                  operator: equals
+                                  value: "Yes"
+                          rejectionCriteria:
+                            type: KeyValues
+                            spec:
+                              matchAnyCondition: true
+                              conditions: []
+                        timeout: 1d
+                    - step:
+                        type: EcsCanaryDelete
+                        name: delete
+                        identifier: delete
+                        spec: {}
+                        timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rolling Deployment
