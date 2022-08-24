@@ -92,11 +92,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  name: Rolling Deployment
-                  identifier: rollingDeployment
-                  type: EcsRollingDeploy
-                  timeout: 10m
+                  type: EcsCanaryDeploy
+                  name: canary deploy
+                  identifier: canary_deploy
                   spec: {}
+                  timeout: 10m
             rollbackSteps:
               - step:
                   name: Rollback Rolling Deployment
