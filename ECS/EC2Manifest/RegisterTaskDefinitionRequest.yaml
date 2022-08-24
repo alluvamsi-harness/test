@@ -1,4 +1,4 @@
-taskDefinitionArn: arn:aws:ecs:us-east-1:806630305776:task-definition/nginx-vamsi:1
+executionRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
 containerDefinitions:
 - name: nginx
   image: <+artifact.image>
@@ -33,5 +33,6 @@ compatibilities:
 requiresCompatibilities:
 - EC2
 registeredAt: '2022-07-28T09:55:39.780Z'
+taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
 registeredBy: arn:aws:sts::806630305776:assumed-role/Okta-Role/allu.vamsi@harness.io
 tags: []
