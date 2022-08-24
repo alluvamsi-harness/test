@@ -113,32 +113,5 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-    - stage:
-        name: shell
-        identifier: shell
-        description: ""
-        type: Custom
-        spec:
-          execution:
-            steps:
-              - step:
-                  type: ShellScript
-                  name: shell-step
-                  identifier: shellstep
-                  spec:
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: echo "hello-vamsi"
-                    environmentVariables: []
-                    outputVariables: []
-                    executionTarget: {}
-                  timeout: 10m
-        tags: {}
-        when:
-          pipelineStatus: Success
-          condition: <+OnPipelineSuccess>
   identifier: ECS_Simple_Test
   name: ECS_Simple_Test
