@@ -23,6 +23,9 @@ pipeline:
                   - name: taskName
                     type: String
                     value: task-vamsi
+                  - name: test
+                    type: String
+                    value: <+steps.rollingDeployment>
                 manifests:
                   - manifest:
                       identifier: taskDef
