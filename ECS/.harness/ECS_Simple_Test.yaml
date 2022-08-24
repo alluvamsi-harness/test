@@ -16,7 +16,7 @@ pipeline:
                 variables:
                   - name: serviceName
                     type: String
-                    value: ecs-vamsi
+                    value: <+pipeline.stages.ecs.spec.serviceConfig.serviceRef>
                   - name: desiredCount
                     type: Number
                     value: 1
