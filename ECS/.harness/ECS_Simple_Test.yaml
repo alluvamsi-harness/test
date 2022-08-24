@@ -43,10 +43,11 @@ pipeline:
                         store:
                           type: Github
                           spec:
-                            connectorRef: allutestrepogithub
+                            connectorRef: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.manifests.taskDef.spec.store.spec.connectorRef>
                             gitFetchType: Branch
                             paths:
                               - ECS/sample/CreateServiceRequest.yaml
+                            repoName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.manifests.taskDef.spec.store.spec.connectorRef>
                             branch: main
                   - manifest:
                       identifier: Scaling
