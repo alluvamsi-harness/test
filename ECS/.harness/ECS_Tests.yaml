@@ -1,0 +1,9 @@
+pipeline:
+  name: ECS_Tests
+  identifier: ECS_Tests
+  template:
+    templateRef: ecsdockerrolling
+    versionLabel: "1"
+  tags: {}
+  projectIdentifier: defaultproject
+  orgIdentifier: default
