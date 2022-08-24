@@ -183,7 +183,16 @@ pipeline:
                             - ECS/JsonSidecar/RegisterScalableTargetRequest.json
                           repoName: test
                           branch: main
-              variables: []
+              variables:
+                - name: serviceName
+                  type: String
+                  value: ecs-overr
+                - name: desiredCount
+                  type: Number
+                  value: 1
+                - name: taskName
+                  type: String
+                  value: task-
           infrastructure:
             environmentRef: ecs_env_vamsi
             infrastructureDefinition:
