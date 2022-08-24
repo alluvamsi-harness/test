@@ -70,7 +70,7 @@ pipeline:
                             connectorRef: allutestrepogithub
                             gitFetchType: Branch
                             paths:
-                              - ECS/sampl/RegisterScalableTargetRequest.yaml
+                              - ECS/sample/RegisterScalableTargetRequest.yaml
                             branch: main
                 artifacts:
                   primary:
