@@ -1,0 +1,15 @@
+connector:
+  name: allu-docker
+  identifier: alludocker
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: DockerRegistry
+  spec:
+    dockerRegistryUrl: https://registry.hub.docker.com/v2/
+    providerType: DockerHub
+    auth:
+      type: UsernamePassword
+      spec:
+        username: alluvamsivishal290
+        passwordRef: alludocker
