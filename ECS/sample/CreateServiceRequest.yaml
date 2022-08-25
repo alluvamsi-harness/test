@@ -4,10 +4,10 @@ desiredCount: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.va
 networkConfiguration:
   awsvpcConfiguration:
     securityGroups:
-    - sg-096eb738a08e8fc3d
+    - sg-08ef5ca063a440404
     subnets:
-    - subnet-0d083b94eaf411736
+    - subnet-0f3f0ef96fbc46e46
     assignPublicIp: ENABLED 
 deploymentConfiguration:
-  maximumPercent: 200
-  minimumHealthyPercent: 100
+  maximumPercent: 100
+  minimumHealthyPercent: 0
