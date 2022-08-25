@@ -87,8 +87,8 @@ pipeline:
               type: ECS
               spec:
                 connectorRef: ecs_cd_play_sainath
-                region: us-east-1
-                cluster: pragyesh-ecs
+                region: us-east-2
+                cluster: jelena-test
             allowSimultaneousDeployments: false
           execution:
             steps:
