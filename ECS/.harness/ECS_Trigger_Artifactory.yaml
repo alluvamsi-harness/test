@@ -76,9 +76,10 @@ pipeline:
                   primary:
                     spec:
                       connectorRef: alluartifactory
-                      artifactPath: /
+                      artifactPath: nginx
                       tag: <+input>
                       repository: test
+                      repositoryUrl: https://alluvamsiharness.jfrog.io/artifactory/test/
                       repositoryFormat: docker
                     type: ArtifactoryRegistry
               type: ECS
