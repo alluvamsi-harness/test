@@ -125,3 +125,23 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+    - stage:
+        name: vaeva
+        identifier: vaeva
+        template:
+          templateRef: ecs_template_test
+          versionLabel: abc
+          templateInputs:
+            type: Deployment
+            spec:
+              serviceConfig:
+                serviceDefinition:
+                  type: ECS
+                  spec:
+                    variables:
+                      - name: serviceName
+                        type: String
+                        value: <+input>
+                      - name: desiredCount
+                        type: Number
+                        value: <+input>
