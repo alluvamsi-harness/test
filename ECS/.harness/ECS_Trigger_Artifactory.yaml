@@ -72,13 +72,7 @@ pipeline:
                             paths:
                               - ECS/sample/RegisterScalableTargetRequest.yaml
                             branch: main
-                artifacts:
-                  primary:
-                    spec:
-                      connectorRef: alludocker
-                      imagePath: alluvamsivishal290/serverless-auto
-                      tag: <+input>
-                    type: DockerRegistry
+                artifacts: {}
               type: ECS
           infrastructure:
             environmentRef: ecs_env_vamsi
