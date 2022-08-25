@@ -72,7 +72,15 @@ pipeline:
                             paths:
                               - ECS/sample/RegisterScalableTargetRequest.yaml
                             branch: main
-                artifacts: {}
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: alluartifactory
+                      artifactPath: /
+                      tag: <+input>
+                      repository: test
+                      repositoryFormat: docker
+                    type: ArtifactoryRegistry
               type: ECS
           infrastructure:
             environmentRef: ecs_env_vamsi
