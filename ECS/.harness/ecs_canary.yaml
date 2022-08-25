@@ -88,7 +88,7 @@ pipeline:
               spec:
                 connectorRef: ecs_cd_play_sainath
                 region: us-east-1
-                cluster: iam-serverless-test
+                cluster: pragyesh-ecs
             allowSimultaneousDeployments: false
           execution:
             steps:
