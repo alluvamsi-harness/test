@@ -86,8 +86,8 @@ pipeline:
               type: ECS
               spec:
                 connectorRef: awscdplayvamsi
-                region: us-east-1
-                cluster: ecs-tutorial
+                region: ap-south-1
+                cluster: sainath-delete-later
             allowSimultaneousDeployments: false
           execution:
             steps:
