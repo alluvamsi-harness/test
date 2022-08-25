@@ -73,7 +73,7 @@ pipeline:
                   primary:
                     spec:
                       connectorRef: awscdplayvamsi
-                      imagePath: <+input>
+                      imagePath: ecs_test-vamsi
                       tag: <+input>
                       region: us-east-1
                     type: Ecr
