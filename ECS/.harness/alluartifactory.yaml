@@ -5,7 +5,7 @@ connector:
   projectIdentifier: defaultproject
   type: Artifactory
   spec:
-    artifactoryServerUrl: https://alluvamsiharness.jfrog.io
+    artifactoryServerUrl: https://alluvamsiharness.jfrog.io/alluvamsiharness
     auth:
       type: UsernamePassword
       spec:
