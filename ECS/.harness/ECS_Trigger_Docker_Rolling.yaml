@@ -75,9 +75,9 @@ pipeline:
                 artifacts:
                   primary:
                     spec:
-                      connectorRef: harnessdocker
-                      imagePath: harness/todolist-sample
-                      tag: "3"
+                      connectorRef: alludocker
+                      imagePath: alluvamsivishal290/test
+                      tag: <+input>
                     type: DockerRegistry
               type: ECS
           infrastructure:
