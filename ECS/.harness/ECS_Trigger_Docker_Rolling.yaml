@@ -76,7 +76,7 @@ pipeline:
                   primary:
                     spec:
                       connectorRef: alludocker
-                      imagePath: alluvamsivishal290/test
+                      imagePath: alluvamsivishal290/serverless-auto
                       tag: <+input>
                     type: DockerRegistry
               type: ECS
