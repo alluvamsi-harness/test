@@ -72,10 +72,10 @@ pipeline:
                 artifacts:
                   primary:
                     spec:
-                      connectorRef: awscdplayvamsi
-                      imagePath: ecs_test-vamsi
+                      connectorRef: <+input>
+                      imagePath: <+input>
                       tag: <+input>
-                      region: us-east-1
+                      region: <+input>
                     type: Ecr
               type: ECS
           infrastructure:
