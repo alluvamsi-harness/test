@@ -16,10 +16,13 @@ pipeline:
                 variables:
                   - name: serviceName
                     type: String
-                    value: ecs-vamsi
+                    value: ecs-ecr-trig
                   - name: desiredCount
                     type: Number
                     value: 1
+                  - name: taskName
+                    type: String
+                    value: task-ecr-trig
                 manifests:
                   - manifest:
                       identifier: taskDef
