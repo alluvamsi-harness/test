@@ -1,0 +1,11 @@
+connector:
+  name: allu-artifactory
+  identifier: alluartifactory
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: defaultproject
+  type: Artifactory
+  spec:
+    artifactoryServerUrl: https://alluvamsiharness.jfrog.io/test
+    auth:
+      type: Anonymous
