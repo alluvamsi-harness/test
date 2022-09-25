@@ -1,13 +1,17 @@
 launchType: FARGATE
-serviceName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>
-desiredCount: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>
+serviceName: <+stage.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>
+desiredCount: <+stage.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>
 networkConfiguration:
   awsvpcConfiguration:
     securityGroups:
-    - sg-08ef5ca063a440404
+    - sg-05f0309d2d55db4a9
     subnets:
     - subnet-0f3f0ef96fbc46e46
     assignPublicIp: ENABLED 
 deploymentConfiguration:
   maximumPercent: 100
   minimumHealthyPercent: 0
+loadBalancers:
+- targetGroupArn: <+targetGroupArn>
+  containerName: nginx
+  containerPort: 80
