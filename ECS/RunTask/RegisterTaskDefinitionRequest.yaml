@@ -1,5 +1,5 @@
 ipcMode:
-executionRoleArn: arn:aws:iam::479370281431:role/ecsTaskExecutionRole
+executionRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
 containerDefinitions:
 - dnsSearchDomains:
   environmentFiles:
@@ -50,8 +50,8 @@ containerDefinitions:
   name: nginx
 placementConstraints: []
 memory: '512'
-taskRoleArn: arn:aws:iam::479370281431:role/ecsTaskExecutionRole
-family: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.taskName>
+taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
+family: <+pipeline.stages.ecs.variables.runTaskName>
 pidMode:
 requiresCompatibilities:
 - FARGATE
