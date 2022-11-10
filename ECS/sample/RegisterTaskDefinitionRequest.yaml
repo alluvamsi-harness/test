@@ -51,8 +51,7 @@ containerDefinitions:
 placementConstraints: []
 memory: '512'
 taskRoleArn: arn:aws:iam::806630305776:role/ecsTaskExecutionRole
-family: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.taskName>
-pidMode:
+family: <+pipeline.stages.ecs.variables.taskName>
 requiresCompatibilities:
 - FARGATE
 networkMode: awsvpc
