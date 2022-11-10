@@ -1,6 +1,6 @@
 launchType: FARGATE
-serviceName: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.serviceName>
-desiredCount: <+pipeline.stages.ecs.spec.serviceConfig.serviceDefinition.spec.variables.desiredCount>
+serviceName: <+pipeline.stages.ecs.variables.serviceName>
+desiredCount: <+pipeline.stages.ecs.variables.desiredCount>
 networkConfiguration:
   awsvpcConfiguration:
     securityGroups:
