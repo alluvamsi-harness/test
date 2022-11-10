@@ -6,4 +6,4 @@ networkConfiguration:
     subnets:
     - subnet-9757dc98
     assignPublicIp: ENABLED
-count: <+pipeline.variables.runtaskcount>
+count: 1
