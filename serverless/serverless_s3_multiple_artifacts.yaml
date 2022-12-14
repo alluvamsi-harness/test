@@ -1,4 +1,4 @@
-service: <+stage.variables.serviceName>
+service: <+pipeline.stages.stage1.variables.serviceName>
 frameworkVersion: '2.35.0'
 
 provider:
