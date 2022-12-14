@@ -1,4 +1,4 @@
-service: <+pipeline.stages.stage1.variables.serviceName>
+service: delete-service
 frameworkVersion: '2.35.0'
 
 provider:
