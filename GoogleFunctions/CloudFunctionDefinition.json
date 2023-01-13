@@ -1,0 +1,28 @@
+{
+  "parent": "projects/cd-play/locations/us-west1",
+  "function":{
+    "name": "vamsi-fun-test",
+    "buildConfig": {
+      "runtime": "nodejs16",
+      "entryPoint": "helloHttp",
+      "source": {
+        "storageSource": {
+          "bucket": "gcf-v2-sources-205009494922-us-west1",
+          "object": "pragyesh-pub-sub-test-1/function-source.zip"
+        }
+      }
+    },
+    "serviceConfig": {
+      "service": "projects/cd-play/locations/us-west1/services/pragyesh-pub-sub-test-1",
+      "timeoutSeconds": 60,
+      "maxInstanceCount": 100,
+      "ingressSettings": "ALLOW_ALL",
+      "availableMemory": "256M",
+      "maxInstanceRequestConcurrency": 1,
+      "availableCpu": "0.1666",
+      "allTrafficOnLatestRevision": true
+    },
+    "environment": "GEN_2"
+  },
+  "function_id": "vamsi-fun-test"
+  }
