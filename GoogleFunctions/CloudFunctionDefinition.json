@@ -8,7 +8,7 @@
       "source": {
         "storageSource": {
           "bucket": "gcf-v2-sources-205009494922-us-west1",
-          "object": "pragyesh-pub-sub-test-1/function-source.zip"
+          "object": "pragyesh-pub-sub-test-8/function-source.zip"
         }
       }
     },
