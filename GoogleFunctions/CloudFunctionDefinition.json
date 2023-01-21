@@ -1,7 +1,7 @@
 {
   "parent": "projects/cd-play/locations/us-west1",
   "function":{
-    "name": "vamsi-fun-test3",
+    "name": "vamsi-fun-test4",
     "buildConfig": {
       "runtime": "nodejs16",
       "entryPoint": "helloHttp",
@@ -24,5 +24,5 @@
     },
     "environment": "GEN_2"
   },
-  "function_id": "vamsi-fun-test3"
+  "function_id": "vamsi-fun-test4"
   }
