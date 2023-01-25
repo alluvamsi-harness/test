@@ -5,12 +5,6 @@
     "buildConfig": {
       "runtime": "nodejs16",
       "entryPoint": "helloHttp",
-      "source": {
-        "storageSource": {
-          "bucket": "gcf-v2-sources-205009494922-us-west1",
-          "object": "pragyesh-pub-sub-test-8/function-source.zip"
-        }
-      }
     },
     "serviceConfig": {
       "service": "projects/cd-play/locations/us-west1/services/pragyesh-pub-sub-test-1",
