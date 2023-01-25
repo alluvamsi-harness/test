@@ -4,7 +4,7 @@
     "name": "vamsi-fun-test5",
     "buildConfig": {
       "runtime": "nodejs16",
-      "entryPoint": "helloHttp",
+      "entryPoint": "helloHttp"
     },
     "serviceConfig": {
       "service": "projects/cd-play/locations/us-west1/services/pragyesh-pub-sub-test-1",
