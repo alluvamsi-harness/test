@@ -7,7 +7,3 @@ provider:
 functions:
   currentTime:
     handler: com.serverless.Handler
-    events:
-      - httpApi:
-          path: /time
-          method: get
