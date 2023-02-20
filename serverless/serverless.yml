@@ -10,3 +10,9 @@ package:
 functions:
   function1:
     handler: index.handler
+    
+plugins:
+  - serverless-domain-manager
+  - serverless-plugin-log-subscription
+  - serverless-pseudo-parameters
+  - serverless-mocha-plugin
