@@ -1,4 +1,4 @@
-service: service1_82
+service: service182
 
 provider:
   name: aws
