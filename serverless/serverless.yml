@@ -5,5 +5,5 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  currentTime:
-    handler: com.serverless.Handler
+  function1:
+    handler: index.handler
