@@ -2,7 +2,7 @@ service: servrles182
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs14.15.4
 
 functions:
   function1:
