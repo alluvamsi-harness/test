@@ -3,6 +3,9 @@ service: servrles182
 provider:
   name: aws
   runtime: nodejs14.15.4
+  
+package:
+  artifact: <+artifact.path>  
 
 functions:
   function1:
