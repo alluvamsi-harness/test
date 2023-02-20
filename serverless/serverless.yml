@@ -11,9 +11,3 @@ functions:
       - httpApi:
           path: /time
           method: get
-plugins:
-  - serverless-domain-manager
-  - serverless-plugin-log-subscription
-  - serverless-pseudo-parameters
-  - serverless-mocha-plugin
-  - serverless-associate-waf
