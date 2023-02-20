@@ -4,9 +4,6 @@ provider:
   name: aws
   runtime: nodejs14.x
 
-package:
-  artifact: <+artifact.path>
-
 functions:
   currentTime:
     handler: com.serverless.Handler
