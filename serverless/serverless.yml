@@ -1,5 +1,4 @@
 service: servrles182
-frameworkVersion: '2.35.0'
 
 provider:
   name: aws
