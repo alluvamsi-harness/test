@@ -1,5 +1,4 @@
 service: servicenwnew
-frameworkVersion: '2.35.0'
 
 provider:
   name: aws
