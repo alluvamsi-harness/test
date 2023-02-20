@@ -1,4 +1,5 @@
 service: servicenwnew
+frameworkVersion: '2.35.0'
 
 provider:
   name: aws
@@ -26,3 +27,6 @@ functions:
 layers:
   commonLibs:
     path: first_layer
+
+plugins:
+  - serverless-plugin-tracing
