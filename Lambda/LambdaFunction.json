@@ -1,5 +1,3 @@
-FunctionName: allu-test
-Role: arn:aws:iam::479370281431:role/allu-lambda
 {
    "runtime": "nodejs18.x",
    "functionName": "allu-lambda",
