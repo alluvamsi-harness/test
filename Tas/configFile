@@ -1,1 +1,1 @@
-echo "<+stage.variables.name>"
+echo "hello"
