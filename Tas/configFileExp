@@ -1,2 +1,5 @@
 <+serviceVariables.filePath>
 <+serviceVariables.manifest>
+<+stage.variables.branch>
+<+env.name>
+<+infra.space>
